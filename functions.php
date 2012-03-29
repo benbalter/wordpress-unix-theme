@@ -82,7 +82,7 @@ function wp_unix_center_string( $str, $len ) {
 	$str = str_pad( ' ', $len, ' ' ) . $str . str_pad( ' ', $len, ' ' );
 	
 	//check if rounded down
-	if ( strlen( $str ) != $len ) $str .= ' ';
+	if ( strlen( $str ) < $len ) $str .= ' ';
 	
 	return $str;
 	
