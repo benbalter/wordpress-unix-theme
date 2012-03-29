@@ -69,7 +69,7 @@ function entityEncode(str) {
 var TerminalShell = {
 	commands: {
 		help: function help(terminal) {
-			terminal.print($('<h3>help</h3>'));
+			terminal.print($('<h3>' + wp_unix_i18n.help + '</h3>'));
 			cmd_list = $('<ul>');
 			$.each(this.commands, function(name, func) {
 				cmd_list.append($('<li>').text(name));
@@ -96,12 +96,12 @@ var TerminalShell = {
 				this.commands[cmd_name].apply(this, cmd_args);
 			} else {
 				if (!(this.fallback && this.fallback(terminal, cmd))) {
-					terminal.print('Unrecognized command. Type "help" for assistance.');
+					terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.bad_command ) );
 				}
 			}
 			this.lastCommand = cmd;
 		} catch (e) {
-			terminal.print($('<p>').addClass('error').text('An internal error occured: '+e));
+			terminal.print($('<p>').addClass('error').text('An internal error occurred: '+e));
 			terminal.setWorking(false);
 		}
 	}
@@ -128,7 +128,7 @@ var Terminal = {
 		fg_color:			'#00FF44',
 		cursor_blink_time:	700,
 		cursor_style:		'block',
-		prompt:				cli_data.prompt,
+		prompt:				wp_unix_i18n.prompt,
 		spinnerCharacters:	['[   ]','[.  ]','[.. ]','[...]'],
 		spinnerSpeed:		250,
 		typingSpeed:		50
