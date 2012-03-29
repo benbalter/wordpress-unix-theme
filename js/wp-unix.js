@@ -100,7 +100,7 @@ TerminalShell.commands['post'] = function( terminal ) {
 	var postID = Array.prototype.slice.call(arguments);
 	postID.shift();
 	
-	query = 'get_post&post_id=' + postID;
+	query = 'get_post&id=' + postID;
 	displayQuery( query );
 	
 }
@@ -111,11 +111,17 @@ TerminalShell.commands['page'] = function( terminal ) {
 	var pageID = Array.prototype.slice.call(arguments);
 	pageID.shift();
 	
-	query = 'get_page&page_id=' + pageID;
+	query = 'get_page&id=' + pageID;
 	displayQuery( query );
 	
 }
 
+//login or go to admin
 TerminalShell.commands['sudo'] = function( terminal ) {
 	document.location.href = wp_unix_i18n.home + '/wp-admin/';
+}
+
+//home
+TerminalShell.commands['home'] = function( terminal ) {
+	document.location.href = wp_unix_i18n.home;
 }
