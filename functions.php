@@ -41,6 +41,54 @@ function wp_unix_enqueue() {
 add_action ( 'wp_enqueue_scripts', 'wp_unix_enqueue' );
 
 /**
+ * Returns welcome message 
+ * @TODO make this an option
+ */
+function wp_unix_welcome_message() {
+	
+	$msg = '';
+	$title = __( 'Welcome To ', 'wp-unix' ) . get_bloginfo('title');
+	$subtitle = get_bloginfo( 'description' );
+	$len = ( strlen( $title ) > strlen( $subtitle ) ) ? strlen( $title ) : strlen( $subtitle );
+	
+	$title = wp_unix_center_string( $title, $len );
+	$subtitle = wp_unix_center_string( $subtitle, $len );
+	$len = $len + 4;
+	
+	$msg .= str_pad( '', $len, '*' ) . "\n";
+	$msg .= "* $title *\n";
+	$msg .= "* $subtitle *\n";
+	$msg .= str_pad( '', $len, '*' ) . "\n";		
+	return $msg;
+
+}
+
+/**
+ * Given a string, centers it with spaces to a given length
+ * @param string $str the input string
+ * @param int $len the string length
+ * @return string the centered string
+ */
+function wp_unix_center_string( $str, $len ) {
+	
+	if ( strlen( $str ) == $len )
+		return $str;
+	
+	//calc diff and halve
+	$len = $len - strlen( $str );
+	$len = floor( $len / 2 );
+	
+	//pad
+	$str = str_pad( ' ', $len, ' ' ) . $str . str_pad( ' ', $len, ' ' );
+	
+	//check if rounded down
+	if ( strlen( $str ) != $len ) $str .= ' ';
+	
+	return $str;
+	
+}
+
+/**
  * Output i18n info to browser
  */
 function wp_unix_i18n() {
@@ -58,7 +106,7 @@ function wp_unix_i18n() {
 	$data = array( 
 		'prompt' => "{$user}@{$host}:/$ ",
 		'home' => get_bloginfo( 'home' ),
-		'welcome_message' => "********************\n* Welcome to " . get_bloginfo( 'title' ) . " *\n********************\n",
+		'welcome_message' => wp_unix_welcome_message(),
 		'error' => __( 'An error occurred', 'wp-unix' ),
 		'invalid_post' => __( 'Invalid post', 'wp-unix' ),
 		'bad_command' => __( 'Unrecognized command. Type "help" for assistance.', 'wp-unix' ),

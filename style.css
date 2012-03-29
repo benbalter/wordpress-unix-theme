@@ -11,10 +11,10 @@ License: GPL3
 
 html, body { height:99%; }
 body { background-color:#000; font-family:"Courier New",Courier,monospace; margin:0 15px; overflow:hidden; padding:0; }
-pre, td, th, p, div { color:#00FF44; font-family:"Courier New",Courier,monospace; font-size:1em; }
+pre, td, th, p, div { color:#00FF44; font-family:"Courier New",Courier,monospace; font-size:14px; }
 div#screen { height:99%; margin:2px; overflow:hidden; padding:0; }
 div, table { margin-bottom:1em; margin-top:0em; }
-pre, td, p { background-color:transparent; line-height: 20px; }
+pre, td, p { background-color:transparent; line-height: 15px; }
 code, p, span, td, th { font-size:1em; }
 p, div#display, ul { margin:0; }
 div#screen p, div#screen span, div#screen a { white-space:pre-wrap; }
