@@ -47,7 +47,7 @@ add_action ( 'wp_enqueue_scripts', 'wp_unix_enqueue' );
 function wp_unix_welcome_message() {
 	
 	$msg = '';
-	$title = __( 'Welcome To ', 'wp-unix' ) . get_bloginfo('title');
+	$title = get_bloginfo('title');
 	$subtitle = get_bloginfo( 'description' );
 	$len = ( strlen( $title ) > strlen( $subtitle ) ) ? strlen( $title ) : strlen( $subtitle );
 	
