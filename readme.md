@@ -11,6 +11,11 @@ License: GPL
 
 Insipration: https://github.com/chromakode/xkcdfools and http://code.google.com/p/wordpress-cli/
 
+Screenshot 
+----------
+
+![Screenshot of WordPress Unix Theme](https://github.com/benbalter/wordpress-unix-theme/raw/master/screenshot.png)
+
 Supported Commands
 ------------------
 * help
