@@ -76,7 +76,7 @@ var TerminalShell = {
 				TerminalShell.process( terminal, 'sudo shutdown' );
 				setTimeout( function() { document.location.reload(); }, 1500 );
 			} else {
-				terminal.print( $('<p>').addClass('error').text( "Must be root" ) );
+				terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.not_root ) );
 			}
 			
 		},
@@ -84,34 +84,34 @@ var TerminalShell = {
 		
 			if ( this.sudo ) {
 				username = terminal.config.prompt.split(':', 1 );
-				terminal.print('Broadcast message from ' + username[0] + ':' );
+				terminal.print( wp_unix_i18n.broadcast_msg.replace( "%s", username[0] ) );
 				terminal.print();
-				terminal.print('The system is going down for maintenance NOW!');
+				terminal.print( wp_unix_i18n.going_down );
 				$('#prompt, #cursor').hide();
 				terminal.promptActive = false;
 				$('#screen').delay( 1000 ).fadeOut( 'slow' );
 			} else {
-				terminal.print( $('<p>').addClass('error').text( "Must be root" ) );
+				terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.not_root ) );
 			}
 			
 		},
 		sudo: function(terminal) {
 			var cmd_args = Array.prototype.slice.call(arguments);
 			cmd_args.shift(); // terminal
-			if (cmd_args.join(' ') == 'make me a sandwich') {
+			if (cmd_args.join(' ') == wp_unix_i18n.sandwich ) {
 				terminal.print('Okay.');
 			} else {
 				var cmd_name = cmd_args.shift();
 				cmd_args.unshift(terminal);
 				cmd_args.push('sudo');
-				if (TerminalShell.commands.hasOwnProperty(cmd_name)) {
+				if (TerminalShell.commands.hasOwnProperty( cmd_name )) {
 					this.sudo = true;
 					this.commands[cmd_name].apply(this, cmd_args);
 					delete this.sudo;
 				} else if (!cmd_name) {
-					terminal.print('sudo what?');
+					terminal.print( wp_unix_i18n.sudo_what );
 				} else {
-					terminal.print('sudo: '+cmd_name+': command not found');
+					terminal.print('sudo: '+cmd_name+': '+wp_unix_i18n.command_not_found );
 				}
 			}
 		},
@@ -140,7 +140,7 @@ var TerminalShell = {
 			}
 			this.lastCommand = cmd;
 		} catch (e) {
-			terminal.print($('<p>').addClass('error').text('An internal error occurred: '+e));
+			terminal.print($('<p>').addClass('error').text( wp_unix_i18n.error +': '+e));
 			terminal.setWorking(false);
 		}
 	}

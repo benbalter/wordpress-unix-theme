@@ -20,7 +20,7 @@
  *
  * @copyright 2012
  * @license GPL v3
- * @version 1.0.7
+ * @version 1.0.8
  * @author Benjamin J. Balter <ben@balter.com>
  * @package wp-unix
  */
@@ -39,7 +39,7 @@ add_theme_support( 'automatic-feed-links' );
  * @return int the current version number
  */
 function wp_unix_version() {
-	return '1.0.7';
+	return '1.0.8';
 }
 
 
@@ -146,6 +146,8 @@ function wp_unix_i18n() {
 	$pages = JSON_API_Core_Controller::get_page_index();
 	$pages = $pages['pages'];
 
+	load_theme_textdomain( 'wp-unix', dirname( __FILE__ ) . '/languages/' );
+
 	get_currentuserinfo();
 	if ( is_user_logged_in() )
 		$user = $current_user->user_nicename;
@@ -174,6 +176,12 @@ function wp_unix_i18n() {
 		'tags'            => get_terms( 'post_tag' ),
 		'categories'      => get_terms( 'category' ),
 		'pages'           => $pages,
+		'not_root'        => __( 'Must be root to execute that command. Perhaps "sudo" can help?', 'wp-unix' ),
+		'going_down'      => __( 'The system is going down for maintenance NOW!', 'wp-unix' ),
+		'command_not_found' => __( 'command not found', 'wp-unix' ),
+		'sudo_what' => __( 'sudo what?', 'wp-unix' ),
+		'sandwich' => __( 'make me a sandwich', 'wp-unix' ),
+		'broadcast_msg' => __( 'Broadcast message from %s', 'wp-unix' ),
 	);
 
 	wp_localize_script( 'cli', 'wp_unix_i18n', $data );
