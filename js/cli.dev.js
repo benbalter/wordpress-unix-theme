@@ -17,20 +17,6 @@
 //@todo don't do this
 var $ = jQuery;
 
-(function($) {
-    $.fn.writeText = function(content) {
-        var contentArray = content.split(""),
-            current = 0,
-            elem = this;
-        setInterval(function() {
-            if(current < contentArray.length) {
-                elem.text(elem.text() + contentArray[current++]);
-            }
-        }, 100);
-    };
-    
-})(jQuery);
-
 /**** start from http://snippets.dzone.com/posts/show/701 ****/
 // Removes leading whitespaces
 function ltrim(value) {
@@ -258,15 +244,24 @@ var Terminal = {
 				}
 			}), this));
 			$.hotkeys.add( 'return', ifActive(function(e) { Terminal.processInputBuffer(); }))
+			$.hotkeys.add( 'enter', ifActive(function(e) { Terminal.processInputBuffer(); }))
 			$.hotkeys.add( 'backspace', ifActive(function(e) { e.preventDefault();	Terminal.deleteCharacter(e.shiftKey); }))
 			$.hotkeys.add( 'del', ifActive(function(e) { Terminal.deleteCharacter(true); }))
 			$.hotkeys.add( 'left', ifActive(function(e) { Terminal.moveCursor(-1); }))
 			$.hotkeys.add( 'right', ifActive(function(e) { Terminal.moveCursor(1); }))
+			$.hotkeys.add( 'ctrl+up', ifActive(function(e) {
+				e.preventDefault();
+				Terminal.scrollPage(-1);
+			}))		
+			$.hotkeys.add( 'shift+up', ifActive(function(e) {
+				e.preventDefault();
+				Terminal.scrollLine(-1);
+			}))	
 			$.hotkeys.add( 'up', ifActive(function(e) {
 				e.preventDefault();
-				if (e.shiftKey || Terminal.sticky.keys.scroll) {
+				if (Terminal.sticky.keys.scroll) {
 					Terminal.scrollLine(-1);
-				} else if (e.ctrlKey || Terminal.sticky.keys.ctrl) {
+				} else if (Terminal.sticky.keys.ctrl) {
 					Terminal.scrollPage(-1);
 				} else {
 					Terminal.moveHistory(-1);
@@ -274,27 +269,43 @@ var Terminal = {
 			}))
 			$.hotkeys.add( 'down', ifActive(function(e) {
 				e.preventDefault();
-				if (e.shiftKey || Terminal.sticky.keys.scroll) {
+				if (Terminal.sticky.keys.scroll) {
 					Terminal.scrollLine(1);
-				} else if (e.ctrlKey || Terminal.sticky.keys.ctrl) {
+				} else if (Terminal.sticky.keys.ctrl) {
 					Terminal.scrollPage(1);
 				} else {
 					Terminal.moveHistory(1);
 				}
 			}))
+			$.hotkeys.add( 'shift+down', ifActive(function(e) {
+				e.preventDefault();
+				Terminal.scrollLine(1);
+			}))			
+			$.hotkeys.add( 'ctrl+down', ifActive(function(e) {
+				e.preventDefault();
+				Terminal.scrollPage(1);
+			}))
 			$.hotkeys.add( 'pageup', ifActive(function(e) { Terminal.scrollPage(-1); }))
 			$.hotkeys.add( 'pagedown', ifActive(function(e) { Terminal.scrollPage(1); }))
+			$.hotkeys.add( 'ctrl+home', ifActive(function(e) {
+				e.preventDefault();
+				Terminal.jumpToTop();
+			}))
 			$.hotkeys.add( 'home', ifActive(function(e) {
 				e.preventDefault();
-				if (e.ctrlKey || Terminal.sticky.keys.ctrl) {
+				if ( Terminal.sticky.keys.ctrl ) {
 					Terminal.jumpToTop();
 				} else {
 					Terminal.setPos(0);
 				}
 			}))
+			$.hotkeys.add( 'ctrl+end', ifActive(function(e) {
+				e.preventDefault();
+				Terminal.jumpToBottom();
+			}));
 			$.hotkeys.add( 'end', ifActive(function(e) {
 				e.preventDefault();
-				if (e.ctrlKey || Terminal.sticky.keys.ctrl) {
+				if (Terminal.sticky.keys.ctrl) {
 					Terminal.jumpToBottom();
 				} else {
 					Terminal.setPos(Terminal.buffer.length);
@@ -543,11 +554,7 @@ var Terminal = {
 	}
 };
 
-
-
-
 $(document).ready(function() {
-	$('#welcome').show();
 	// Kill Opera's backspace keyboard action.
 	document.onkeydown = document.onkeypress = function(e) { return $.hotkeys.special_keys[e.keyCode] != 'backspace'; };
 	Terminal.init();
