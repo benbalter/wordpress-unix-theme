@@ -26,7 +26,7 @@ function displayQuery( query ) {
 			Terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.error ) );
 			return;
 		}
-		
+				
 		//single post -- output
 		if ( data.post != undefined ) {
 			displayPost( data.post );
@@ -53,16 +53,37 @@ function displayQuery( query ) {
 
 //output an individual post
 function displayPost( post  ) {
-			
-	Terminal.print( $('<h3>').text( post.title ) );
+
+	Terminal.print( '' );
+	Terminal.print( post.title );
+	for ( line = ''; line.length < post.title.length; line = line + "=" );
+	Terminal.print( line );
+	Terminal.print( wp_unix_i18n.posted + $.format.date( post.date, wp_unix_i18n.date_format ) );
+	Terminal.print( '' );
 	Terminal.print( $( post.content ) );
+	Terminal.print( '' );
+	meta = wp_unix_i18n.meta;
+	meta = meta.replace( "%3$s", post.author.name ).replace( "%2$s", termList( post.categories ) ).replace( "%1$s", termList( post.tags ) );
+	Terminal.print( meta );
+	Terminal.print( '' );
+	
+}
+
+function termList( terms ) {
+	
+	var termList = [];
+	$.each( terms, function( i, term ) { console.log( term );
+		termList[i] = term.title;
+	});
+	console.log( terms );
+	return termList.join( ', ' );
 	
 }
 
 //output list of posts
 function listPosts( posts ) {
 
-	$( posts ).each( function( i, post ) {
+	$.each( posts, function( i, post ) {
 		Terminal.print( post.id + '. ' + post.title );
 	});
 
@@ -79,6 +100,12 @@ function welcomeMessage() {
 $('#screen').bind('cli-load', function() {
 	
 	welcomeMessage();
+	
+	//single post/page
+	if ( wp_unix_i18n.query.length == 1 ) {
+		post = wp_unix_i18n.query.shift();
+		Terminal.runCommand( post.type + " " + post.id );
+	}
 	
 });
 
@@ -117,11 +144,29 @@ TerminalShell.commands['page'] = function( terminal ) {
 }
 
 //login or go to admin
-TerminalShell.commands['sudo'] = function( terminal ) {
+TerminalShell.commands['su'] = function( terminal ) {
 	document.location.href = wp_unix_i18n.home + '/wp-admin/';
 }
 
 //home
 TerminalShell.commands['home'] = function( terminal ) {
 	document.location.href = wp_unix_i18n.home;
+}
+
+//search
+TerminalShell.commands['search'] = function( terminal ) {
+	
+	var query = Array.prototype.slice.call(arguments);
+	query.shift();
+	query = query.shift();
+	
+	if ( !query ) {
+		Terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.search_error ) );
+		return;		
+	}
+		
+	$.getJSON( wp_unix_i18n.home + '/?json=1&q=' + query, function( data ) {
+		displayQuery( data );
+	});
+	
 }

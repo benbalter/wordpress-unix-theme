@@ -33,6 +33,8 @@ function wp_unix_enqueue() {
 	//js
 	wp_enqueue_script( 'jquery-hotkeys', null, array( 'jquery' ), wp_unix_version(), true );
 	wp_enqueue_script( 'jquery-browser', get_template_directory_uri() . '/js/jquery.browser.js', array( 'jquery' ), wp_unix_version(), true );
+	wp_enqueue_script( 'jquery-dateformat', get_template_directory_uri() . '/js/jquery.dateformat.js', array( 'jquery' ), wp_unix_version(), true );
+
 	wp_enqueue_script( 'cli', get_template_directory_uri() . '/js/cli.js', array( 'jquery' ), wp_unix_version(), true );
 	wp_enqueue_script( 'wp_unix', get_template_directory_uri() . '/js/wp-unix.js', array( 'cli', 'jquery' ), wp_unix_version(), true );
 	
@@ -102,7 +104,9 @@ function wp_unix_i18n() {
 	
 	$host = get_bloginfo( 'url' );
 	$host = str_replace( 'http://', '', $host );
-
+	
+	$json_api = new JSON_API_Introspector();
+	
 	$data = array( 
 		'prompt' => "{$user}@{$host}:/$ ",
 		'home' => get_bloginfo( 'home' ),
@@ -112,6 +116,11 @@ function wp_unix_i18n() {
 		'bad_command' => __( 'Unrecognized command. Type "help" for assistance.', 'wp-unix' ),
 		'help' => __( 'help', 'wp-unix' ),
 		'post_usage' => __( 'Usage: post [postID]', 'wp-unix' ),
+		'posted' => 'Posted on ',
+		'date_format' => 'MMMM dd, yyyy',
+		'meta' => __( 'This entry was posted in %1$s and tagged %2$s by %3$s.', 'wp-unix' ),
+		'search_error' => __( 'Usage: search [search term(s)]', 'wp-unix' ),
+		'query' => $json_api->get_posts(),
 	);
 	
 	wp_localize_script( 'cli', 'wp_unix_i18n', $data );

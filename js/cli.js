@@ -131,7 +131,7 @@ var Terminal = {
 		prompt:				wp_unix_i18n.prompt,
 		spinnerCharacters:	['[   ]','[.  ]','[.. ]','[...]'],
 		spinnerSpeed:		250,
-		typingSpeed:		50
+		typingSpeed:		25
 	},
 	
 	sticky: {
@@ -489,6 +489,63 @@ var Terminal = {
 		}, this), this.config.typingSpeed);
 	}
 };
+
+TerminalShell.commands['restart'] = function(terminal) {
+	
+	if ( this.sudo ) {
+		TerminalShell.process( terminal, 'sudo shutdown' );
+		setTimeout( function() { document.location.reload(); }, 1500 );
+	} else {
+		terminal.print( $('<p>').addClass('error').text( "Must be root" ) );
+	}
+	
+}
+
+TerminalShell.commands['shutdown'] = function(terminal) {
+		
+	if ( this.sudo ) {
+		username = terminal.config.prompt.split(':', 1 );
+		terminal.print('Broadcast message from ' + username[0] + ':' );
+		terminal.print();
+		terminal.print('The system is going down for maintenance NOW!');
+		$('#prompt, #cursor').hide();
+		terminal.promptActive = false;
+		$('#screen').delay( 1000 ).fadeOut( 'slow' );
+	} else {
+		terminal.print( $('<p>').addClass('error').text( "Must be root" ) );
+	}
+	
+}
+
+TerminalShell.commands['sudo'] = function(terminal) {
+	var cmd_args = Array.prototype.slice.call(arguments);
+	cmd_args.shift(); // terminal
+	if (cmd_args.join(' ') == 'make me a sandwich') {
+		terminal.print('Okay.');
+	} else {
+		var cmd_name = cmd_args.shift();
+		cmd_args.unshift(terminal);
+		cmd_args.push('sudo');
+		if (TerminalShell.commands.hasOwnProperty(cmd_name)) {
+			this.sudo = true;
+			this.commands[cmd_name].apply(this, cmd_args);
+			delete this.sudo;
+		} else if (!cmd_name) {
+			terminal.print('sudo what?');
+		} else {
+			terminal.print('sudo: '+cmd_name+': command not found');
+		}
+	}
+};
+
+TerminalShell.commands['logout'] =
+TerminalShell.commands['exit'] = 
+TerminalShell.commands['quit'] = function(terminal) {
+	terminal.print('Bye.');
+	$('#prompt, #cursor').hide();
+	terminal.promptActive = false;
+};
+
 
 $(document).ready(function() {
 	$('#welcome').show();
