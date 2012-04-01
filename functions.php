@@ -158,8 +158,9 @@ add_filter( 'the_content', 'wp_unix_markdownify', 100, 1 );
 /**
  * Remove jetpack sharing links from posts
  */
-function wp_unix_no_sharing() {
+function wp_unix_no_sharing( $content ) {
 	remove_filter( 'the_content', 'sharing_display', 19 );
+	return $content;
 }
 
 add_action( 'the_content', 'wp_unix_no_sharing', 1 );
