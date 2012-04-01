@@ -16,3 +16,9 @@ wp_link_pages();
 // dynamic sidebars? sure, why not?!
 register_sidebar( array( 'name' => 'foo', 'id' => 'bar' ) );
 dynamic_sidebar();
+
+//what's a class? CSS? Must be something the kids are using these days…
+post_class();
+
+//old school (non-ajax) tag listing
+wp_list_tags();
