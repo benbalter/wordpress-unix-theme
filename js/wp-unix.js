@@ -91,6 +91,13 @@ function termList( terms ) {
 	
 }
 
+function listTerms( terms ) {
+	$.each( terms, function( i, term ) {
+		Terminal.print( term.term_id + '. ' + term.name );
+	});
+	
+}
+
 //output list of posts
 function listPosts( posts ) {
 
@@ -196,17 +203,29 @@ TerminalShell.commands['search'] = function( terminal ) {
 }
 
 TerminalShell.commands['category'] = function( terminal ) {
-	Terminal.print( '@todo' );
+
+	var categoryID = Array.prototype.slice.call(arguments);
+	categoryID.shift();
+	categoryID = categoryID.shift();
+
+	displayQuery( 'get_category_posts=1&category_id=' + categoryID );
+	
 }
 
 TerminalShell.commands['categories'] = function( terminal ) {
-	Terminal.print( '@todo' );
+	listTerms( wp_unix_i18n.categories );
 }
 
 TerminalShell.commands['tags'] = function( terminal ) {
-	Terminal.print( '@todo' );
+	listTerms( wp_unix_i18n.tags );
 }
 
 TerminalShell.commands['tag'] = function( terminal ) {
-	Terminal.print( '@todo' );
+	
+	var tagID = Array.prototype.slice.call(arguments);
+	tagID.shift();
+	tagID = tagID.shift();
+
+	displayQuery( 'get_tag_posts=1&tag_id=' + tagID );
+	
 }

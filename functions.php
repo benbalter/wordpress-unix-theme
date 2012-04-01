@@ -121,6 +121,8 @@ function wp_unix_i18n() {
 		'meta' => __( 'This entry was posted in %1$s and tagged %2$s by %3$s.', 'wp-unix' ),
 		'search_error' => __( 'Usage: search [search term(s)]', 'wp-unix' ),
 		'query' => $json_api->introspector->get_posts(),
+		'tags' => get_terms( 'post_tag' ),
+		'categories' => get_terms( 'category' ),
 	);
 	
 	wp_localize_script( 'cli', 'wp_unix_i18n', $data );
