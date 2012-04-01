@@ -219,7 +219,7 @@ TerminalShell.commands['category'] = function( terminal ) {
 	categoryID.shift();
 	categoryID = categoryID.shift();
 
-	displayQuery( 'get_category_posts=1&category_id=' + categoryID );
+	displayQuery( 'get_category_posts&category_id=' + categoryID );
 	
 }
 
@@ -237,6 +237,6 @@ TerminalShell.commands['tag'] = function( terminal ) {
 	tagID.shift();
 	tagID = tagID.shift();
 
-	displayQuery( 'get_tag_posts=1&tag_id=' + tagID );
+	displayQuery( 'get_tag_posts&tag_id=' + tagID );
 	
 }

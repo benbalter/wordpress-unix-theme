@@ -152,9 +152,7 @@ function wp_unix_markdownify( $content ) {
 add_filter( 'the_content', 'wp_unix_markdownify', 100, 1 );
 
 function wp_unix_no_sharing() {
-	remove_filter( 'the_content', 'sharing_display' );
+	remove_filter( 'the_content', 'sharing_display', 19 );
 }
 
 add_action( 'plugins_loaded', 'wp_unix_no_sharing' );
-
-
