@@ -26,6 +26,8 @@ add_action( 'plugins_loaded', 'wp_unix_json_api_check' );
  * Enqueue Javascripts
  */
 function wp_unix_enqueue() { 
+
+	$suffix = ( WP_DEBUG ) ? '.dev' : '';
 	
 	//css
 	wp_enqueue_style( 'boilerplate', get_template_directory_uri() . '/boilerplate.css' );
@@ -39,8 +41,8 @@ function wp_unix_enqueue() {
 	wp_enqueue_script( 'jquery-browser', get_template_directory_uri() . '/js/jquery.browser.js', array( 'jquery' ), wp_unix_version(), true );
 	wp_enqueue_script( 'jquery-dateformat', get_template_directory_uri() . '/js/jquery.dateformat.js', array( 'jquery' ), wp_unix_version(), true );
 
-	wp_enqueue_script( 'cli', get_template_directory_uri() . '/js/cli.js', array( 'jquery' ), wp_unix_version(), true );
-	wp_enqueue_script( 'wp_unix', get_template_directory_uri() . '/js/wp-unix.js', array( 'cli', 'jquery' ), wp_unix_version(), true );
+	wp_enqueue_script( 'cli', get_template_directory_uri() . "/js/cli{$suffix}.js", array( 'jquery' ), wp_unix_version(), true );
+	wp_enqueue_script( 'wp_unix', get_template_directory_uri() . "/js/wp-unix{$suffix}.js", array( 'cli', 'jquery' ), wp_unix_version(), true );
 	
 }
 
