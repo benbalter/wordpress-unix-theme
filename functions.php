@@ -101,6 +101,9 @@ function wp_unix_i18n() {
 	
 	global $current_user;
 	global $json_api;
+	require_once( $json_api->controller_path( 'core' ) );
+	$pages = JSON_API_Core_Controller::get_page_index();
+	$pages = $pages['pages'];
 	
 	get_currentuserinfo();
 	if ( is_user_logged_in() )
@@ -128,9 +131,9 @@ function wp_unix_i18n() {
 		'query' => $json_api->introspector->get_posts(),
 		'tags' => get_terms( 'post_tag' ),
 		'categories' => get_terms( 'category' ),
-		'pages' => $json_api->introspector->get_posts( array( 'parent' => false, 'post_type' => 'page' ) ),
+		'pages' => $pages,
 	);
-	
+
 	wp_localize_script( 'cli', 'wp_unix_i18n', $data );
 
 }
