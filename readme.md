@@ -11,6 +11,8 @@ License: GPL
 
 Insipration: https://github.com/chromakode/xkcdfools and http://code.google.com/p/wordpress-cli/
 
+If you would like to contribution a translation, you may do so on the [WP Unix Theme GlotPress Install](http://translations.benbalter.com/) (no coding knowledge required).
+
 Screenshot 
 ----------
 
