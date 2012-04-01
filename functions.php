@@ -29,6 +29,11 @@
 require_once dirname( __FILE__ ) . '/markdownify/markdownify.php';
 $markdownify = new Markdownify( null, null, false ); //last arg: don't output unparsable HTML
 
+//this is meaningless, but we need it to pass validation, so here goes...
+if ( ! isset( $content_width ) ) $content_width = 900;
+
+add_theme_support( 'automatic-feed-links' );
+
 /**
  * Returns current version of theme
  * @return int the current version number
@@ -70,6 +75,9 @@ function wp_unix_enqueue() {
 
 	wp_enqueue_script( 'cli', get_template_directory_uri() . "/js/cli{$suffix}.js", array( 'jquery' ), wp_unix_version(), true );
 	wp_enqueue_script( 'wp_unix', get_template_directory_uri() . "/js/wp-unix{$suffix}.js", array( 'cli', 'jquery' ), wp_unix_version(), true );
+	
+	//validation...
+	if ( is_singular() ) wp_enqueue_script( "comment-reply" );
 
 }
 
@@ -149,7 +157,7 @@ function wp_unix_i18n() {
 
 	$data = array(
 		'prompt'          => "{$user}@{$host}:/$ ",
-		'home'            => get_bloginfo( 'home' ),
+		'home'            => get_bloginfo( 'url' ),
 		'welcome_message' => wp_unix_welcome_message(),
 		'error'           => __( 'An error occurred', 'wp-unix' ),
 		'invalid_post'    => __( 'Invalid post', 'wp-unix' ),

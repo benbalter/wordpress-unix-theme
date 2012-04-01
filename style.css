@@ -7,6 +7,7 @@ Author URI: http://ben.balter.com/
 Version: 1.0
 Tags: black, green, dark, one-column, flexible-width, fixed-width, translation-ready, holiday, seasonal
 License: GPL3
+License URI: http://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
 html, body { height:99%; }
@@ -46,3 +47,6 @@ div#credit:hover { opacity:.75; }
 div#credit a { font-size:xx-small; text-decoration:underline; }
 #touch { opacity: 0; height: 100%; width: 100%; display: block; position: absolute; top: 0; left: 0; display: none; }
 .touchMsg{ position: absolute; bottom: 0; right: 0; }
+
+/* Validation */
+.wp-caption, .wp-caption-text, .sticky, .gallery-caption, .bypostauthor, .alignright, .alignleft, .aligncenter {}
