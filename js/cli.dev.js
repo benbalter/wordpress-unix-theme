@@ -558,5 +558,22 @@ $(document).ready(function() {
 	// Kill Opera's backspace keyboard action.
 	document.onkeydown = document.onkeypress = function(e) { return $.hotkeys.special_keys[e.keyCode] != 'backspace'; };
 	Terminal.init();
-	$('#touch').select();
+	
+	$('#touch').focus( function() {	
+		$(this).hide(); 
+		$('.touchMsg').fadeOut();	
+	});
+
+});
+
+//mobiel support
+$('#screen').bind('cli-load', function() {
+
+	//if this is a touch device, overlay a transparent input 
+	// to pull up the software keyboard
+	if ( Modernizr.touch ) {
+		$('#touch').show();
+		jQuery('<div>').addClass('touchMsg').text( wp_unix_i18n.touch_message ).appendTo('body');
+	}
+
 });

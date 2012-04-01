@@ -9,7 +9,7 @@ $markdownify = new Markdownify( null, null, false ); //last arg: don't output un
  * @return int the current version number
  */
 function wp_unix_version() {
-	return 1;
+	return '1.0.7';
 }
 
 /**
@@ -31,7 +31,7 @@ function wp_unix_enqueue() {
 	
 	//css
 	wp_enqueue_style( 'boilerplate', get_template_directory_uri() . '/boilerplate.css' );
-	wp_enqueue_style( 'cli', get_stylesheet_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'cli', get_stylesheet_directory_uri() . '/style.css', null, wp_unix_version() );
 
 	//modernizr
 	wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr-2.5.3-respond-1.1.0.min.js', wp_unix_version(), true );
@@ -130,6 +130,7 @@ function wp_unix_i18n() {
 		'meta' => __( 'This entry was posted in %1$s and tagged %2$s by %3$s.', 'wp-unix' ),
 		'search_error' => __( 'Usage: search [search term(s)]', 'wp-unix' ),
 		'no_results' => __( 'No posts found' , 'wp-unix' ),
+		'touch_message' => __( 'Tap screen to begin...', 'wp-unix' ),
 		'query' => $json_api->introspector->get_posts(),
 		'tags' => get_terms( 'post_tag' ),
 		'categories' => get_terms( 'category' ),
