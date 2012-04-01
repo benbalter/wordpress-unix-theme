@@ -150,3 +150,18 @@ function wp_unix_markdownify( $content ) {
 
 
 add_filter( 'the_content', 'wp_unix_markdownify', 100, 1 );
+remove_filter('the_content', 'sharing_display', 19);
+
+function bb_contact_shortcode() {
+
+	$id = 10;
+	$contact = get_post( $id );
+	return apply_filters( 'the_content', $contact->post_content );
+	
+}
+
+function bb_register_contact_shortcode() {	
+	add_shortcode( 'contact', 'bb_contact_shortcode' );
+}
+
+add_action( 'init', 'bb_register_contact_shortcode' );
