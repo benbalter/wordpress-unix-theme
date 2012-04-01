@@ -11,6 +11,32 @@ License: GPL
 
 Insipration: https://github.com/chromakode/xkcdfools and http://code.google.com/p/wordpress-cli/
 
+Supported Commands
+------------------
+* help
+* clear
+* restart
+* shutdown
+* sudo
+* quit
+* exit
+* logout
+* source
+* list
+* ls
+* posts
+* pages
+* post
+* page
+* su
+* home
+* search
+* category
+* categories
+* tags
+* tag
+* [All top-level pages]
+
 Changes
 -------
 * Added WordPress functionality (posts, pages, permalinks, etc.)
