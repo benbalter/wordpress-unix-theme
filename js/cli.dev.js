@@ -6,6 +6,11 @@
  jQuery rewrite and overhaul
  Chromakode, 2010
  http://www.chromakode.com/
+
+ WordPress Rewrite and Overhaul
+ BenBalter, 2012
+ http://unix.benbalter.com
+ 
 */
 
 //get jQuery out of no conflict

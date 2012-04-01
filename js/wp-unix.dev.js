@@ -1,3 +1,11 @@
+/*
+Client-side WordPress-specific logic for cli
+
+Benjamin J. Balter, 2012
+http://unix.benbalter.com
+
+*/
+
 //global query object
 var cli_query = {};
 
