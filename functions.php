@@ -1,6 +1,8 @@
 <?php 
 
+//init markdownify
 require_once( dirname( __FILE__ ) . '/markdownify/markdownify.php' );
+$markdownify = new Markdownify( null, null, false ); //last arg: don't output unparsable HTML
 
 /**
  * Returns current version of theme
@@ -137,10 +139,9 @@ add_action( 'wp_enqueue_scripts', 'wp_unix_i18n' );
 
 
 function wp_unix_markdownify( $content ) {
-	//var_dump( 'before', $content );
-	$md = new Markdownify();
-	$content = $md->parseString( $content );
-	//var_dump( 'after', $content );
+	global $markdownify;
+	$content = do_shortcode( $content );
+	$content = $markdownify->parseString( $content );
 	return $content;
 }
 
