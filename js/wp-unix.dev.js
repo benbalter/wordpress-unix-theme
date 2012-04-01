@@ -1,11 +1,3 @@
-/*
-Client-side WordPress-specific logic for cli
-
-Benjamin J. Balter, 2012
-http://unix.benbalter.com
-
-*/
-
 //global query object
 var cli_query = {};
 
@@ -85,9 +77,9 @@ function displayPost( post  ) {
 	if ( post.type != 'page' ) {
 		meta = wp_unix_i18n.meta;
 		meta = meta.replace( "%3$s", post.author.name ).replace( "%2$s", 	termList( post.categories ) ).replace( "%1$s", termList( post.tags ) );
+		Terminal.print( meta );
 	}
 	
-	Terminal.print( meta );
 	Terminal.print( '' );
 	
 	//push permlink

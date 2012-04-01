@@ -142,17 +142,22 @@ function wp_unix_i18n() {
 
 add_action( 'wp_enqueue_scripts', 'wp_unix_i18n' );
 
-
+/**
+ * Converts HTML pages to markdown
+ * @param string $content the content (HTML)
+ * @param return string the content (plain text)
+ */
 function wp_unix_markdownify( $content ) {
 	global $markdownify;
-	$content = do_shortcode( $content );
-	$content = $markdownify->parseString( $content );
-	return $content;
+	return $markdownify->parseString( $content );
 }
 
 
 add_filter( 'the_content', 'wp_unix_markdownify', 100, 1 );
 
+/**
+ * Remove jetpack sharing links from posts
+ */
 function wp_unix_no_sharing() {
 	remove_filter( 'the_content', 'sharing_display', 19 );
 }
