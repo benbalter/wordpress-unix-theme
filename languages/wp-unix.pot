@@ -1,0 +1,99 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Unix Theme\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-01 17:04-0500\n"
+"PO-Revision-Date: 2012-04-01 17:05-0500\n"
+"Last-Translator: Benjamin J. Balter <Ben@Balter.com>\n"
+"Language-Team: Benjamin J. Balter <ben@balter.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;gettext;gettext_noop;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SearchPath-0: /Volumes/Macintosh HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix\n"
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:155
+msgid "anon"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:164
+msgid "An error occurred"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:165
+msgid "Invalid post"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:166
+msgid "Unrecognized command. Type \"help\" for assistance."
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:167
+msgid "help"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:168
+msgid "Usage: post [postID]"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:171
+#, php-format
+msgid "This entry was posted in %1$s and tagged %2$s by %3$s."
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:172
+msgid "Usage: search [search term(s)]"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:173
+msgid "No posts found"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:174
+msgid "Tap screen to begin..."
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:179
+msgid "Must be root to execute that command. Perhaps \"sudo\" can help?"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:180
+msgid "The system is going down for maintenance NOW!"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:181
+msgid "command not found"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:182
+msgid "sudo what?"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:183
+msgid "make me a sandwich"
+msgstr ""
+
+#: /Volumes/Macintosh
+#: HD/Applications/MAMP/htdocs/trunk/wp-content/themes/wp-unix/functions.php:184
+#, php-format
+msgid "Broadcast message from %s"
+msgstr ""
+
