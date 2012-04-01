@@ -130,4 +130,4 @@ function wp_unix_i18n() {
 add_action( 'wp_enqueue_scripts', 'wp_unix_i18n' );
 
 //no HTML in posts
-add_filter( 'the_content', 'wp_nohtml_kses' );
+add_filter( 'the_content', 'wp_filter_nohtml_kses' );

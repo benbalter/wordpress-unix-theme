@@ -58,7 +58,10 @@ function displayPost( post  ) {
 	Terminal.print( post.title );
 	for ( line = ''; line.length < post.title.length; line = line + "=" );
 	Terminal.print( line );
-	Terminal.print( wp_unix_i18n.posted + $.format.date( post.date, wp_unix_i18n.date_format ) );
+	
+	if ( post.type != 'page' )
+		Terminal.print( wp_unix_i18n.posted + $.format.date( post.date, wp_unix_i18n.date_format ) );
+	
 	Terminal.print( '' );
 	Terminal.print( $( post.content ) );
 	Terminal.print( '' );
