@@ -1,11 +1,3 @@
-=== WordPress Unix Theme ===
-Contributors: benbalter
-Donate link: http://ben.balter.com/donate
-Tags: 
-Requires at least: 3.3
-Tested up to: 3.4
-Stable tag: 1.0.7
-
 WordPress Unix Theme
 ====================
 
