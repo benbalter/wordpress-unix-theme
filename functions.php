@@ -150,5 +150,5 @@ function wp_unix_markdownify( $content ) {
 
 
 add_filter( 'the_content', 'wp_unix_markdownify', 100, 1 );
-remove_filter('the_content', 'sharing_display', 19);
+remove_filter('the_content', 'sharing_display' );
 
