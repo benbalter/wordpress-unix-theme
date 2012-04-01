@@ -14,6 +14,7 @@ Insipration: https://github.com/chromakode/xkcdfools and http://code.google.com/
 Changes
 -------
 * Added WordPress functionality (posts, pages, permalinks, etc.)
+* Added touch support
 * Upgraded HTML template to HTML5
 * Upgraded jQuery compatability to 1.6.2; now relies on Google API when possible
 * Upgraded JQuery Hotkeys to 2.0
