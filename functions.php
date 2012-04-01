@@ -96,6 +96,8 @@ function wp_unix_center_string( $str, $len ) {
 function wp_unix_i18n() {
 	
 	global $current_user;
+	global $json_api;
+	
 	get_currentuserinfo();
 	if ( is_user_logged_in() )
 		$user = $current_user->user_nicename;
@@ -104,8 +106,6 @@ function wp_unix_i18n() {
 	
 	$host = get_bloginfo( 'url' );
 	$host = str_replace( 'http://', '', $host );
-	
-	$json_api = new JSON_API_Introspector();
 	
 	$data = array( 
 		'prompt' => "{$user}@{$host}:/$ ",
@@ -120,7 +120,7 @@ function wp_unix_i18n() {
 		'date_format' => 'MMMM dd, yyyy',
 		'meta' => __( 'This entry was posted in %1$s and tagged %2$s by %3$s.', 'wp-unix' ),
 		'search_error' => __( 'Usage: search [search term(s)]', 'wp-unix' ),
-		'query' => $json_api->get_posts(),
+		'query' => $json_api->introspector->get_posts(),
 	);
 	
 	wp_localize_script( 'cli', 'wp_unix_i18n', $data );
@@ -128,3 +128,6 @@ function wp_unix_i18n() {
 }
 
 add_action( 'wp_enqueue_scripts', 'wp_unix_i18n' );
+
+//no HTML in posts
+add_filter( 'the_content', 'wp_nohtml_kses' );

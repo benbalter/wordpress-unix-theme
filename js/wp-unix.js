@@ -62,20 +62,28 @@ function displayPost( post  ) {
 	Terminal.print( '' );
 	Terminal.print( $( post.content ) );
 	Terminal.print( '' );
-	meta = wp_unix_i18n.meta;
-	meta = meta.replace( "%3$s", post.author.name ).replace( "%2$s", termList( post.categories ) ).replace( "%1$s", termList( post.tags ) );
+	
+	//only show meta on non-page posts
+	if ( post.type != 'page' ) {
+		meta = wp_unix_i18n.meta;
+		meta = meta.replace( "%3$s", post.author.name ).replace( "%2$s", 	termList( post.categories ) ).replace( "%1$s", termList( post.tags ) );
+	}
+	
 	Terminal.print( meta );
 	Terminal.print( '' );
+	
+	//push permlink
+	history.pushState({page:post.url}, post.url, post.url);
 	
 }
 
 function termList( terms ) {
 	
 	var termList = [];
-	$.each( terms, function( i, term ) { console.log( term );
+	$.each( terms, function( i, term ) {
 		termList[i] = term.title;
 	});
-	console.log( terms );
+	
 	return termList.join( ', ' );
 	
 }
@@ -103,7 +111,7 @@ $('#screen').bind('cli-load', function() {
 	
 	//single post/page
 	if ( wp_unix_i18n.query.length == 1 ) {
-		post = wp_unix_i18n.query.shift();
+		post = wp_unix_i18n.query[0];
 		Terminal.runCommand( post.type + " " + post.id );
 	}
 	
@@ -113,6 +121,13 @@ $('#screen').bind('cli-load', function() {
 TerminalShell.commands['posts'] = 
 TerminalShell.commands['ls'] = 
 TerminalShell.commands['list'] = function( terminal ) {
+
+	//we're on an archive and this is the initial view, save the query	
+	if ( wp_unix_i18n.query.length != 0 ) {
+		listPosts( wp_unix_i18n.query );
+		return;
+	}
+
 	displayQuery( 'get_recent_posts' );
 }
 
@@ -126,6 +141,12 @@ TerminalShell.commands['post'] = function( terminal ) {
 
 	var postID = Array.prototype.slice.call(arguments);
 	postID.shift();
+	
+	if ( wp_unix_i18n.query.length == 1 && wp_unix_i18n.query[0].id == postID ) {
+		post = wp_unix_i18n.query.shift();
+		displayPost( post );
+		return;
+	}
 	
 	query = 'get_post&id=' + postID;
 	displayQuery( query );
@@ -169,4 +190,20 @@ TerminalShell.commands['search'] = function( terminal ) {
 		displayQuery( data );
 	});
 	
+}
+
+TerminalShell.commands['category'] = function( terminal ) {
+	Terminal.print( '@todo' );
+}
+
+TerminalShell.commands['categories'] = function( terminal ) {
+	Terminal.print( '@todo' );
+}
+
+TerminalShell.commands['tags'] = function( terminal ) {
+	Terminal.print( '@todo' );
+}
+
+TerminalShell.commands['tag'] = function( terminal ) {
+	Terminal.print( '@todo' );
 }
