@@ -546,6 +546,10 @@ TerminalShell.commands['quit'] = function(terminal) {
 	terminal.promptActive = false;
 };
 
+TerminalShell.commands['source'] = function( terminal) {
+	terminal.print( $('<a>').attr('href','https://github.com/benbalter/wordpress-unix-theme').text('https://github.com/benbalter/wordpress-unix-theme') );
+}
+
 
 $(document).ready(function() {
 	$('#welcome').show();
