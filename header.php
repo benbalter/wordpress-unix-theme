@@ -14,3 +14,4 @@
 <div id="indicators"><span id="alt-indicator">Alt-</span><span id="ctrl-indicator">Ctrl-</span> <span id="scroll-indicator">SCR LOCK</span></div>
 <div id="screen">
 	<div id="display">
+		<input type="text" id="touch" name="touch-support" value="" />

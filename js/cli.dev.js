@@ -558,4 +558,5 @@ $(document).ready(function() {
 	// Kill Opera's backspace keyboard action.
 	document.onkeydown = document.onkeypress = function(e) { return $.hotkeys.special_keys[e.keyCode] != 'backspace'; };
 	Terminal.init();
+	$('#touch').select();
 });
