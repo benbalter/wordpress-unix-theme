@@ -1,5 +1,7 @@
 <?php 
 
+require_once( dirname( __FILE__ ) . '/markdownify/markdownify.php' );
+
 /**
  * Returns current version of theme
  * @return int the current version number
@@ -120,9 +122,11 @@ function wp_unix_i18n() {
 		'date_format' => 'MMMM dd, yyyy',
 		'meta' => __( 'This entry was posted in %1$s and tagged %2$s by %3$s.', 'wp-unix' ),
 		'search_error' => __( 'Usage: search [search term(s)]', 'wp-unix' ),
+		'no_results' => __( 'No posts found' , 'wp-unix' ),
 		'query' => $json_api->introspector->get_posts(),
 		'tags' => get_terms( 'post_tag' ),
 		'categories' => get_terms( 'category' ),
+		'pages' => $json_api->introspector->get_posts( array( 'parent' => false, 'post_type' => 'page' ) ),
 	);
 	
 	wp_localize_script( 'cli', 'wp_unix_i18n', $data );
@@ -131,5 +135,14 @@ function wp_unix_i18n() {
 
 add_action( 'wp_enqueue_scripts', 'wp_unix_i18n' );
 
-//no HTML in posts
-add_filter( 'the_content', 'wp_filter_nohtml_kses' );
+
+function wp_unix_markdownify( $content ) {
+	//var_dump( 'before', $content );
+	$md = new Markdownify();
+	$content = $md->parseString( $content );
+	//var_dump( 'after', $content );
+	return $content;
+}
+
+
+add_filter( 'the_content', 'wp_unix_markdownify', 100, 1 );

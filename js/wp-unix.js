@@ -26,6 +26,13 @@ function displayQuery( query ) {
 			Terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.error ) );
 			return;
 		}
+		
+				
+		//no results
+		if ( data.count == 0 ) {
+			Terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.no_results ) );
+			return;
+		}
 				
 		//single post -- output
 		if ( data.post != undefined ) {
@@ -63,7 +70,7 @@ function displayPost( post  ) {
 		Terminal.print( wp_unix_i18n.posted + $.format.date( post.date, wp_unix_i18n.date_format ) );
 	
 	Terminal.print( '' );
-	Terminal.print( $( post.content ) );
+	Terminal.print( post.content );
 	Terminal.print( '' );
 	
 	//only show meta on non-page posts
@@ -119,6 +126,12 @@ $('#screen').bind('cli-load', function() {
 	
 	welcomeMessage();
 	
+	$.each( wp_unix_i18n.pages, function( i, page ) {
+		TerminalShell.commands[ page.slug ] = function( terminal ) { 
+			TerminalShell.process( terminal, 'page ' + page.id );
+		};
+	});
+
 	//single post/page
 	if ( wp_unix_i18n.query.length == 1 ) {
 		post = wp_unix_i18n.query[0];
@@ -189,16 +202,14 @@ TerminalShell.commands['search'] = function( terminal ) {
 	
 	var query = Array.prototype.slice.call(arguments);
 	query.shift();
-	query = query.shift();
+	query = query.join(' ');
 	
 	if ( !query ) {
 		Terminal.print( $('<p>').addClass('error').text( wp_unix_i18n.search_error ) );
 		return;		
 	}
-		
-	$.getJSON( wp_unix_i18n.home + '/?json=1&q=' + query, function( data ) {
-		displayQuery( data );
-	});
+
+	displayQuery( "1&s=" + query );
 	
 }
 
