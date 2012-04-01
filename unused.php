@@ -21,4 +21,4 @@ dynamic_sidebar();
 post_class();
 
 //old school (non-ajax) tag listing
-wp_list_tags();
+the_tags();
